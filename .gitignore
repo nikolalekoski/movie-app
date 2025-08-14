@@ -1,0 +1,14 @@
+.# Node modules
+node_modules/
+
+# Optional: Ignore environment variables
+.env
+.env.local
+.env.*.local
+
+# Optional: build output
+dist/
+build/
+
+# Optional: Mac-specific files
+.DS_Store
