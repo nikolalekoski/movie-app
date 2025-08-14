@@ -47,7 +47,7 @@ It lets users browse, search, and filter movies from a **dummy dataset**, making
 
 # Clone the repository
 
-git clone https://github.com/your-username/movie-browser.git
+git clone https://github.com/goran-josifovski/movie-app.git
 
 # Go into the project folder
 
