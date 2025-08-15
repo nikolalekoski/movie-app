@@ -5,8 +5,8 @@ function App() {
   
   return (
     <>
-    <Header></Header>
-    <Home></Home>
+    <Header/>
+    <Home/>
     </>
   )
 }
