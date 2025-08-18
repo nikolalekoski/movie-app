@@ -1,9 +1,11 @@
 import { Typography, AppBar } from "@mui/material";
 
-export default function Header(){
-return (
-    <AppBar position="static">
-<Typography variant="h2" align="center">Movie app</Typography>
-</AppBar>
-)
+export default function Header() {
+  return (
+    <AppBar sx={{ display: "flex" }}>
+      <Typography variant="h2" sx={{ flexGrow: "1", textAlign: "center" }}>
+        Movie app
+      </Typography>
+    </AppBar>
+  );
 }
