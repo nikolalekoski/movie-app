@@ -2,7 +2,6 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import CardActions from "@mui/material/CardActions";
 import { Typography } from "@mui/material";
 
 interface Movie {
@@ -21,7 +20,17 @@ type MovieCardProps = {
 
 export default function MovieCard({ movie }: MovieCardProps) {
   return (
-    <Card sx={{ maxWidth: 345, margin: 2 }}>
+    <Card
+      sx={{
+        maxWidth: 345,
+        margin: 2,
+        transition: "transform 0.3s, box-shadow 0.3s",
+        "&:hover": {
+          transform: "scale(1.03)",
+          boxShadow: 3,
+        },
+      }}
+    >
       <CardMedia
         component="img"
         height="250"

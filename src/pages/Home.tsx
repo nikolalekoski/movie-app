@@ -6,10 +6,20 @@ export default function Home() {
   return (
     <PageLayout title={"Home"}>
       <Box sx={{ background: "lightblue" }}>
-        <Typography>Welcome!</Typography>
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
+        <Typography variant="h6">Welcome!</Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            //justifyContent: "center",
+            gap: 1,
+            padding: 2,
+          }}
+        >
+          {movies.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
+        </Box>
       </Box>
     </PageLayout>
   );
