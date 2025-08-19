@@ -36,16 +36,14 @@ export default function Home() {
 
   return (
     <PageLayout title={"Home"}>
-      <Box sx={{ background: "lightblue", padding: 2 }}>
-        <Typography variant="h6">Welcome!</Typography>
-
-        {/* Pass setSearchParam to SearchBar if needed */}
+      <Box sx={{ backgroundColor: "#f8f9fa", minHeight: "100vh", padding: 2 }}>
         <SearchBar
           searchTerm={searchTerm}
           onSearchChange={setSearchTerm}
           searchParam={searchParam}
           onSearchParamChange={setSearchParam}
         />
+        <Typography variant="h6">Welcome!</Typography>
 
         <Box
           sx={{
