@@ -33,7 +33,7 @@ export default function Home() {
 
         <Grid container spacing={3}>
           {filteredMovies.map((movie) => (
-            <Grid item xs={4} key={movie.id}>
+            <Grid key={movie.id}>
               <MovieCard movie={movie} />
             </Grid>
           ))}
