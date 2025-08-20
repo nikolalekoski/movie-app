@@ -1,6 +1,7 @@
 import { TextField, Box, MenuItem } from "@mui/material";
 import React from "react";
-import { EmovieSearchParam } from "../pages/Home";
+import { EmovieSearchParam } from "../types/movie";
+
 interface SearchBarProps {
   searchTerm: string;
   onSearchChange: (value: string) => void;
@@ -8,38 +9,25 @@ interface SearchBarProps {
   onSearchParamChange: (param: EmovieSearchParam) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({
-  searchTerm,
-  onSearchChange,
-  searchParam,
-  onSearchParamChange,
-}) => {
+const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, onSearchChange, searchParam, onSearchParamChange }) => {
   return (
     <Box
       sx={{
         display: "flex",
-        justifyContent: "center",
-        width: "100%",
-        mt: 4,
-      }}
-    >
+        mt: 5,
+      }}>
       <Box
         sx={{
           display: "flex",
-          width: "100%",
-          maxWidth: 700,
-          backgroundColor: "white",
           borderRadius: 8,
           boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
           alignItems: "center",
-          px: 2,
-          height: 56,
+          px: 4,
           transition: "box-shadow 0.3s ease",
           "&:hover": {
             boxShadow: "0 6px 16px rgba(0,0,0,0.15)",
           },
-        }}
-      >
+        }}>
         <TextField
           variant="standard"
           placeholder="Search movies"
@@ -58,38 +46,30 @@ const SearchBar: React.FC<SearchBarProps> = ({
           select
           variant="standard"
           value={searchParam}
-          onChange={(e) =>
-            onSearchParamChange(e.target.value as EmovieSearchParam)
-          }
+          onChange={(e) => onSearchParamChange(e.target.value as EmovieSearchParam)}
           InputProps={{
             disableUnderline: true,
             sx: {
-              fontSize: "1rem",
-              paddingY: 0.75,
-              color: "#555",
-              height: "110%",
-              pl: 2.5,
-              fontWeight: "600",
+              py: 0.75,
+              textAlign: "center",
             },
           }}
           sx={{
             width: 150,
-            backgroundColor: "transparent",
-            borderRadius: 0,
-            px: 1,
-            borderLeft: "2px solid black",
+
+            borderLeft: "1px solid grey",
             "& .MuiSelect-select": {
               paddingY: 1,
-              backgroundColor: "transparent",
             },
             "& .MuiMenuItem-root": {
               fontSize: "1rem",
             },
-          }}
-        >
-          <MenuItem value="title">Title</MenuItem>
-          <MenuItem value="description">Description</MenuItem>
-          <MenuItem value="genre">Genre</MenuItem>
+          }}>
+          {Object.values(EmovieSearchParam).map((value, index) => (
+            <MenuItem key={index} value={value}>
+              {value}
+            </MenuItem>
+          ))}
         </TextField>
       </Box>
     </Box>

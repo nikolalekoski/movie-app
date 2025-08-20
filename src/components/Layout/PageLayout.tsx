@@ -13,22 +13,14 @@ export const PageLayout = ({ children, title, headerRight }: IProps) => {
   return (
     <>
       <Header />
+
       <Box sx={{ paddingTop: "50px", px: 3, mb: 2 }}>
         <Box
           sx={{
             display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            mb: 2,
-          }}
-        >
+          }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography
-              variant="h4"
-              fontWeight="bold"
-              sx={{ lineHeight: 1, mt: "28px" }}
-            >
+            <Typography variant="h4" fontWeight="bold" sx={{ lineHeight: 1, mt: "28px" }}>
               {title}
             </Typography>
           </Box>
@@ -38,9 +30,8 @@ export const PageLayout = ({ children, title, headerRight }: IProps) => {
                 display: "flex",
                 justifyContent: "center",
                 flex: 1,
-              }}
-            >
-              <Box sx={{ width: 800 }}>{headerRight}</Box>
+              }}>
+              <Box>{headerRight}</Box>
             </Box>
           )}
         </Box>

@@ -1,24 +1,14 @@
-//import movies from "../db/moveis.json";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { Typography } from "@mui/material";
+import type { IMovie } from "../types/movie";
 
-interface Movie {
-  id: number;
-  title: string;
-  genre: string;
-  rating: number;
-  year: number;
-  poster: string;
-  description: string;
-}
-
-type MovieCardProps = {
-  movie: Movie;
+type IProps = {
+  movie: IMovie;
 };
 
-export default function MovieCard({ movie }: MovieCardProps) {
+export default function MovieCard({ movie }: IProps) {
   return (
     <Card
       sx={{
@@ -29,14 +19,8 @@ export default function MovieCard({ movie }: MovieCardProps) {
           transform: "scale(1.03)",
           boxShadow: 3,
         },
-      }}
-    >
-      <CardMedia
-        component="img"
-        height="250"
-        image={movie.poster}
-        alt={movie.title}
-      />
+      }}>
+      <CardMedia component="img" height="250" image={movie.poster} alt={movie.title} />
       <CardContent>
         <Typography sx={{ fontWeight: "bold" }}>
           {movie.title} {movie.year}
