@@ -25,5 +25,60 @@
     "year": 2014,
     "poster": "https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg",
     "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
+  },
+
+  {
+    "id": 4,
+    "title": "Blade Runner 2049",
+    "genre": "Science Fiction",
+    "rating": 8.0,
+    "year": 2017,
+    "poster": "https://image.tmdb.org/t/p/w1280/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
+    "description": "A young blade runner's discovery of a long-buried secret leads him to track down former blade runner Rick Deckard, who's been missing for thirty years."
+  },
+  {
+    "id": 5,
+    "title": "Mad Max: Fury Road",
+    "genre": "Action",
+    "rating": 8.1,
+    "year": 2015,
+    "poster": "https://image.tmdb.org/t/p/w500/8tZYtuWezp8JbcsvHYO0O46tFbo.jpg",
+    "description": "In a post-apocalyptic wasteland, Max teams up with a mysterious woman to flee from a cult leader and his army in a high-octane road war."
+  },
+  {
+    "id": 6,
+    "title": "Arrival",
+    "genre": "Drama",
+    "rating": 7.9,
+    "year": 2016,
+    "poster": "https://image.tmdb.org/t/p/w500/x2FJsf1ElAgr63Y3PNPtJrcmpoe.jpg",
+    "description": "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecraft appear around the world."
+  },
+  {
+    "id": 7,
+    "title": "The Matrix",
+    "genre": "Science Fiction",
+    "rating": 8.7,
+    "year": 1999,
+    "poster": "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
+    "description": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers."
+  },
+  {
+    "id": 8,
+    "title": "Gladiator",
+    "genre": "Action",
+    "rating": 8.5,
+    "year": 2000,
+    "poster": "https://image.tmdb.org/t/p/w500/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg",
+    "description": "A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery."
+  },
+  {
+    "id": 9,
+    "title": "The Prestige",
+    "genre": "Drama",
+    "rating": 8.5,
+    "year": 2006,
+    "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/1/4/7/51147-the-prestige-0-230-0-345-crop.jpg?v=ad7e891177",
+    "description": "Two rival magicians engage in a bitter competition to create the ultimate stage illusion while sacrificing everything they have to outwit each other."
   }
 ]
