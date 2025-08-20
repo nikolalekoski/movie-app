@@ -38,7 +38,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
         alt={movie.title}
       />
       <CardContent>
-        <Typography>
+        <Typography sx={{ fontWeight: "bold" }}>
           {movie.title} {movie.year}
         </Typography>
         <Typography>
