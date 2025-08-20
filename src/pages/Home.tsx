@@ -35,14 +35,18 @@ export default function Home() {
   });*/
 
   return (
-    <PageLayout title={"Home"}>
-      <Box sx={{ backgroundColor: "#f8f9fa", minHeight: "100vh", padding: 2 }}>
+    <PageLayout
+      title={"Home"}
+      headerRight={
         <SearchBar
           searchTerm={searchTerm}
           onSearchChange={setSearchTerm}
           searchParam={searchParam}
           onSearchParamChange={setSearchParam}
         />
+      }
+    >
+      <Box sx={{ backgroundColor: "#f8f9fa", minHeight: "100vh", padding: 2 }}>
         <Typography variant="h6">Welcome!</Typography>
 
         <Box
