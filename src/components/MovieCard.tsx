@@ -12,23 +12,38 @@ export default function MovieCard({ movie }: IProps) {
   return (
     <Card
       sx={{
-        maxWidth: 345,
-        margin: 2,
+        maxWidth: 385,
+        margin: 4,
         transition: "transform 0.3s, box-shadow 0.3s",
         "&:hover": {
           transform: "scale(1.03)",
           boxShadow: 3,
         },
-      }}>
-      <CardMedia component="img" height="250" image={movie.poster} alt={movie.title} />
-      <CardContent>
-        <Typography sx={{ fontWeight: "bold" }}>
+      }}
+    >
+      <CardMedia
+        component="img"
+        height="250"
+        image={movie.poster}
+        alt={movie.title}
+      />
+      <CardContent sx={{ flexGrow: 1 }}>
+        <Typography sx={{ fontWeight: "bold", mb: 1 }}>
           {movie.title} {movie.year}
         </Typography>
-        <Typography>
+        <Typography sx={{ mb: 1 }}>
           {movie.genre} - {movie.rating}
         </Typography>
-        <Typography>{movie.description}</Typography>
+        <Typography
+          sx={{
+            overflow: "hidden",
+            display: "-webkit-box",
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: "vertical",
+          }}
+        >
+          {movie.description}
+        </Typography>
       </CardContent>
     </Card>
   );
