@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "title": "Inception",
     "genre": "Science Fiction",
     "rating": 8.8,
@@ -9,7 +9,7 @@
     "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO."
   },
   {
-    "id": 2,
+    "id": "2",
     "title": "The Dark Knight",
     "genre": "Action",
     "rating": 9.0,
@@ -18,7 +18,7 @@
     "description": "When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham."
   },
   {
-    "id": 3,
+    "id": "3",
     "title": "Interstellar",
     "genre": "Adventure",
     "rating": 8.6,
@@ -28,7 +28,7 @@
   },
 
   {
-    "id": 4,
+    "id": "4",
     "title": "Blade Runner 2049",
     "genre": "Science Fiction",
     "rating": 8.0,
@@ -37,7 +37,7 @@
     "description": "A young blade runner's discovery of a long-buried secret leads him to track down former blade runner Rick Deckard, who's been missing for thirty years."
   },
   {
-    "id": 5,
+    "id": "5",
     "title": "Mad Max: Fury Road",
     "genre": "Action",
     "rating": 8.1,
@@ -46,7 +46,7 @@
     "description": "In a post-apocalyptic wasteland, Max teams up with a mysterious woman to flee from a cult leader and his army in a high-octane road war."
   },
   {
-    "id": 6,
+    "id": "6",
     "title": "Arrival",
     "genre": "Drama",
     "rating": 7.9,
@@ -55,7 +55,7 @@
     "description": "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecraft appear around the world."
   },
   {
-    "id": 7,
+    "id": "7",
     "title": "The Matrix",
     "genre": "Science Fiction",
     "rating": 8.7,
@@ -64,7 +64,7 @@
     "description": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers."
   },
   {
-    "id": 8,
+    "id": "8",
     "title": "Gladiator",
     "genre": "Action",
     "rating": 8.5,
@@ -73,7 +73,7 @@
     "description": "A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery."
   },
   {
-    "id": 9,
+    "id": "9",
     "title": "The Prestige",
     "genre": "Drama",
     "rating": 8.5,
