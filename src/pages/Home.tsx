@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { PageLayout } from "../components/Layout/PageLayout";
-import movies from "../db/moveis.json";
+import movies from "../db/movies.json";
 import MovieCard from "../components/MovieCard";
 import { useState } from "react";
 import SearchBar from "../components/SearchBar";

@@ -39,7 +39,6 @@ export default function MovieCard({ movie }: IProps) {
     }
 
     localStorage.setItem("favorites", JSON.stringify(updatedIds));
-    //setIsFavorite(!isFavorite);
   };
 
   return (

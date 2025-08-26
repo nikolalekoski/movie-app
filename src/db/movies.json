@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": "595ffe67-de19-44a1-982a-b0b3b36b9e4c",
     "title": "Inception",
     "genre": "Science Fiction",
     "rating": 8.8,
@@ -9,16 +9,16 @@
     "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO."
   },
   {
-    "id": "2",
+    "id": "42222c5f-e757-4d53-beb3-3c7383970388",
     "title": "The Dark Knight",
     "genre": "Action",
-    "rating": 9.0,
+    "rating": 9,
     "year": 2008,
     "poster": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
     "description": "When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham."
   },
   {
-    "id": "3",
+    "id": "b891339b-fa76-4de4-a915-069b404e2a00",
     "title": "Interstellar",
     "genre": "Adventure",
     "rating": 8.6,
@@ -26,18 +26,17 @@
     "poster": "https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg",
     "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
   },
-
   {
-    "id": "4",
+    "id": "7dc861a8-76d4-434f-b10a-c9951da8e53c",
     "title": "Blade Runner 2049",
     "genre": "Science Fiction",
-    "rating": 8.0,
+    "rating": 8,
     "year": 2017,
     "poster": "https://image.tmdb.org/t/p/w1280/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
     "description": "A young blade runner's discovery of a long-buried secret leads him to track down former blade runner Rick Deckard, who's been missing for thirty years."
   },
   {
-    "id": "5",
+    "id": "4ea7989a-2b10-4d53-b528-b6227bca3d58",
     "title": "Mad Max: Fury Road",
     "genre": "Action",
     "rating": 8.1,
@@ -46,7 +45,7 @@
     "description": "In a post-apocalyptic wasteland, Max teams up with a mysterious woman to flee from a cult leader and his army in a high-octane road war."
   },
   {
-    "id": "6",
+    "id": "86dddbe4-9612-460b-a3af-0841856d2ce8",
     "title": "Arrival",
     "genre": "Drama",
     "rating": 7.9,
@@ -55,7 +54,7 @@
     "description": "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecraft appear around the world."
   },
   {
-    "id": "7",
+    "id": "47fbee4f-176a-4725-b566-b67558e1e0cf",
     "title": "The Matrix",
     "genre": "Science Fiction",
     "rating": 8.7,
@@ -64,7 +63,7 @@
     "description": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers."
   },
   {
-    "id": "8",
+    "id": "04ec0e06-5748-4e9a-a017-3b2e545ba015",
     "title": "Gladiator",
     "genre": "Action",
     "rating": 8.5,
@@ -73,7 +72,7 @@
     "description": "A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery."
   },
   {
-    "id": "9",
+    "id": "06f9b7f7-6047-4f0a-8f7b-d52707b21ddb",
     "title": "The Prestige",
     "genre": "Drama",
     "rating": 8.5,
