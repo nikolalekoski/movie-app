@@ -1,32 +1,41 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Grid, Button, CircularProgress } from "@mui/material";
 import { PageLayout } from "../components/Layout/PageLayout";
-import movies from "../db/movies.json";
 import MovieCard from "../components/MovieCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
-import { EmovieSearchParam } from "../types/movie.ts";
-import { filterMovies } from "../helpers/helper.ts";
-import { Colors } from "../shared/colors.ts";
-import { Grid, Button } from "@mui/material";
+import { EmovieSearchParam } from "../types/movie";
+import { filterMovies } from "../helpers/helper";
+import { Colors } from "../shared/colors";
+import { useAppDispatch, useAppSelector } from "../store/store";
+import { getPopularMovies } from "../store/features/movie-slice";
 
 export default function Home() {
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const dispatch = useAppDispatch();
+  const { data, loading } = useAppSelector((state) => state.movie);
+  const movies = data.data.results || [];
+
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchParam, setSearchParam] = useState<EmovieSearchParam>(
     EmovieSearchParam.TITLE
   );
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
-  const rawFilteredMovies = filterMovies(movies, searchTerm, searchParam);
-  const favoriteIds: string[] = JSON.parse(
+
+  useEffect(() => {
+    dispatch(getPopularMovies());
+  }, [dispatch]);
+
+  const favoriteIds: number[] = JSON.parse(
     localStorage.getItem("favorites") || "[]"
   );
 
+  const rawFilteredMovies = filterMovies(movies, searchTerm, searchParam);
   const filteredMovies = showFavoritesOnly
     ? rawFilteredMovies.filter((movie) => favoriteIds.includes(movie.id))
     : rawFilteredMovies;
 
   return (
     <PageLayout
-      title={"Home"}
+      title="Home"
       headerRight={
         <SearchBar
           searchTerm={searchTerm}
@@ -47,13 +56,17 @@ export default function Home() {
           {showFavoritesOnly ? "Show All Movies" : "Favorites"}
         </Button>
 
-        <Grid container spacing={3}>
-          {filteredMovies.map((movie) => (
-            <Grid key={movie.id}>
-              <MovieCard movie={movie} />
-            </Grid>
-          ))}
-        </Grid>
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <Grid container spacing={3}>
+            {filteredMovies.map((movie) => (
+              <Grid key={movie.id}>
+                <MovieCard movie={movie} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </Box>
     </PageLayout>
   );

@@ -15,20 +15,18 @@ type IProps = {
 export default function MovieCard({ movie }: IProps) {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  // Load from localStorage
   useEffect(() => {
-    const storedIds: string[] = JSON.parse(
+    const storedIds: number[] = JSON.parse(
       localStorage.getItem("favorites") || "[]"
     );
     setIsFavorite(storedIds.includes(movie.id));
   }, [movie.id]);
 
-  // Toggle favorite
   const toggleFavorite = () => {
-    const storedIds: string[] = JSON.parse(
+    const storedIds: number[] = JSON.parse(
       localStorage.getItem("favorites") || "[]"
     );
-    let updatedIds: string[];
+    let updatedIds: number[];
 
     if (storedIds.includes(movie.id)) {
       updatedIds = storedIds.filter((id) => id !== movie.id);
@@ -46,6 +44,7 @@ export default function MovieCard({ movie }: IProps) {
       sx={{
         maxWidth: 385,
         margin: 5,
+        position: "relative",
         transition: "transform 0.3s, box-shadow 0.3s",
         "&:hover": {
           transform: "scale(1.03)",
@@ -56,9 +55,10 @@ export default function MovieCard({ movie }: IProps) {
       <CardMedia
         component="img"
         height="250"
-        image={movie.poster}
+        image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         alt={movie.title}
       />
+
       <IconButton
         onClick={toggleFavorite}
         sx={{
@@ -77,12 +77,30 @@ export default function MovieCard({ movie }: IProps) {
           <FavoriteBorderIcon />
         )}
       </IconButton>
-      <CardContent>
-        <Typography sx={{ fontWeight: "bold", mb: 1 }}>
-          {movie.title} {movie.year}
+
+      <CardContent
+        sx={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          overflow: "hidden",
+          paddingBottom: 1,
+        }}
+      >
+        <Typography
+          sx={{
+            fontWeight: "bold",
+            mb: 1,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {movie.title} ({new Date(movie.release_date).getFullYear()})
         </Typography>
         <Typography sx={{ mb: 1 }}>
-          {movie.genre} - {movie.rating}
+          Rating: {movie.vote_average} ({movie.vote_count} votes)
         </Typography>
         <Typography
           sx={{
@@ -92,7 +110,7 @@ export default function MovieCard({ movie }: IProps) {
             WebkitBoxOrient: "vertical",
           }}
         >
-          {movie.description}
+          {movie.overview}
         </Typography>
       </CardContent>
     </Card>

@@ -1,6 +1,10 @@
 import type { EmovieSearchParam, IMovie } from "../types/movie";
 
-export function filterMovies(movies: IMovie[], searchTerm: string, searchParam: EmovieSearchParam): IMovie[] {
+export function filterMovies(
+  movies: IMovie[],
+  searchTerm: string,
+  searchParam: EmovieSearchParam
+): IMovie[] {
   const lowerSearchTerm = searchTerm.toLowerCase();
 
   return movies.filter((movie) => {
