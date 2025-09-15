@@ -1,22 +1,22 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
-import Home from "./pages/Home";
-import Upcoming from "./pages/Upcoming";
-import Popular from "./pages/Popular";
-import Latest from "./pages/Latest";
+
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+import { Router } from "./router/Router";
+import { BrowserRouter } from "react-router-dom";
+import { CssBaseline } from "@mui/material";
 
 function App() {
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-        <Route path="/popular" element={<Popular />} />
-        <Route path="/upcoming" element={<Upcoming />} />
-        <Route path="/latest" element={<Latest />} />
-      </Routes>
-    </Router>
+    <>
+      <Provider store={store}>
+        <BrowserRouter>
+          <CssBaseline />
+          <Header />
+          <Router />
+        </BrowserRouter>
+      </Provider>
+    </>
   );
 }
 

@@ -8,13 +8,15 @@ export default function Header() {
       sx={{
         display: "flex",
         flexDirection: "row",
-        alignItems: "center",
         px: 2,
+        background: "white",
+        color: "black",
       }}
-      position="static">
-      <Typography variant="h2" sx={{ flexGrow: 1, textAlign: "left" }}>
+      position="sticky">
+      <Typography variant="h4" sx={{ flexGrow: 1, textAlign: "left", p: 1 }}>
         Movie app
       </Typography>
+
       <Box sx={{ display: "flex", gap: 1 }}>
         {PAGES_CONSTANT.map((item, index) => (
           <Button
@@ -26,10 +28,10 @@ export default function Header() {
               fontSize: "1.1rem",
               fontWeight: "bold",
               textTransform: "none",
-              borderRadius: "20px",
+              borderRadius: "10px",
               transition: "all 0.3s ease",
               "&:hover": {
-                backgroundColor: "rgba(255, 255, 255, 0.2)",
+                backgroundColor: "rgba(255, 255, 255, 0.09)",
               },
             }}>
             {item.pageTitle}
