@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { Typography } from "@mui/material";
 import type { IMovie } from "../types/movie";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/Favorite";
@@ -13,26 +13,21 @@ type IProps = {
 };
 
 export default function MovieCard({ movie }: IProps) {
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  useEffect(() => {
-    const storedIds: number[] = JSON.parse(localStorage.getItem("favorites") || "[]");
-    setIsFavorite(storedIds.includes(movie.id));
-  }, [movie.id]);
+  const [favourites, setFavourites] = useState<number[]>(() => {
+    return JSON.parse(localStorage.getItem("favorites") || "[]");
+  });
 
   const toggleFavorite = () => {
-    const storedIds: number[] = JSON.parse(localStorage.getItem("favorites") || "[]");
-    let updatedIds: number[];
+    let favouritesUpdated: number[];
 
-    if (storedIds.includes(movie.id)) {
-      updatedIds = storedIds.filter((id) => id !== movie.id);
-      setIsFavorite(false);
+    if (favourites.includes(movie.id)) {
+      favouritesUpdated = favourites.filter((favId) => favId !== movie.id);
     } else {
-      updatedIds = [...storedIds, movie.id];
-      setIsFavorite(true);
+      favouritesUpdated = [...favourites, movie.id];
     }
 
-    localStorage.setItem("favorites", JSON.stringify(updatedIds));
+    setFavourites(favouritesUpdated);
+    localStorage.setItem("favorites", JSON.stringify(favouritesUpdated));
   };
 
   return (
@@ -56,7 +51,7 @@ export default function MovieCard({ movie }: IProps) {
             backgroundColor: "rgba(255, 255, 255, 0.8)",
           },
         }}>
-        {isFavorite ? <FavoriteIcon sx={{ color: "red" }} /> : <FavoriteBorderIcon />}
+        {favourites.includes(movie.id) ? <FavoriteIcon sx={{ color: "red" }} /> : <FavoriteBorderIcon />}
       </IconButton>
 
       <CardContent
