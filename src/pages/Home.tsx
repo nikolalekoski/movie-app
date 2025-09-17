@@ -21,7 +21,12 @@ export default function Home() {
   const filteredMovies = rawFilteredMovies;
 
   return (
-    <PageLayout title="Home" searchBarComponent={<SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />}>
+    <PageLayout
+      title="Home"
+      searchBarComponent={
+        <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+      }
+    >
       <Box>
         {loading ? (
           <CircularProgress />
@@ -30,16 +35,19 @@ export default function Home() {
             sx={{
               display: "flex",
               flexWrap: "wrap",
+              justifyContent: "flex-start",
               gap: 3,
-            }}>
+            }}
+          >
             {filteredMovies.map((movie) => (
               <Box
                 key={movie.id}
                 sx={{
-                  flex: "1 1 calc(33.333% - 16px)",
-                  minWidth: "250px",
-                  gap: 2,
-                }}>
+                  flex: "0 1 calc(33.333% - 24px)", // 3 per row with spacing
+                  boxSizing: "border-box",
+                  display: "flex",
+                }}
+              >
                 <MovieCard movie={movie} />
               </Box>
             ))}

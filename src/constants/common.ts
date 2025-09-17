@@ -3,4 +3,5 @@ export const PAGES_CONSTANT = [
   { pageTitle: "Popular", url: "/popular" },
   { pageTitle: "Upcoming", url: "/upcoming" },
   { pageTitle: "Latest", url: "/latest" },
+  { pageTitle: "Favorites", url: "/favorites" },
 ];

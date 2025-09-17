@@ -1,7 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
 import type { IMovieState } from "../../types/movie";
-const { VITE_API_KEY } = import.meta.env;
+import {
+  getPopularMovies as fetchPopularMovies,
+  getUpcomingMovies as fetchUpcomingMovies,
+  getLatestMovie as fetchLatestMovie,
+} from "../services/movie.service";
 
 const initialState: IMovieState = {
   data: {
@@ -17,35 +20,19 @@ const initialState: IMovieState = {
 
 export const getPopularMovies = createAsyncThunk(
   "movie/getPopularMovies",
-  async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${VITE_API_KEY}`
-    );
-    const data = await response.json();
-    return data;
-  }
+  async () => await fetchPopularMovies()
 );
+
 export const getUpcomingMovies = createAsyncThunk(
   "movie/getUpcomingMovies",
-  async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${VITE_API_KEY}`
-    );
-    const data = await response.json();
-    return data;
-  }
+  async () => await fetchUpcomingMovies()
 );
 
 export const getLatestMovie = createAsyncThunk(
   "movie/getLatestMovie",
-  async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/latest?api_key=${VITE_API_KEY}`
-    );
-    const data = await response.json();
-    return data;
-  }
+  async () => await fetchLatestMovie()
 );
+
 const movieSlice = createSlice({
   name: "movie",
   initialState,
@@ -55,47 +42,42 @@ const movieSlice = createSlice({
       .addCase(getPopularMovies.pending, (state) => {
         state.loading = true;
       })
-      .addCase(
-        getPopularMovies.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          console.log("Full API response:", action.payload); // Log full response
-          state.loading = false;
-          state.data = {
-            data: { results: action.payload.results },
-            page: action.payload.page,
-            total_pages: action.payload.total_pages,
-            total_results: action.payload.total_results,
-          };
-        }
-      )
+      .addCase(getPopularMovies.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.data = {
+          data: { results: payload.results },
+          page: payload.page,
+          total_pages: payload.total_pages,
+          total_results: payload.total_results,
+        };
+      })
       .addCase(getPopularMovies.rejected, (state) => {
         state.loading = false;
       })
-      // Upcoming
+
       .addCase(getUpcomingMovies.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getUpcomingMovies.fulfilled, (state, action) => {
+      .addCase(getUpcomingMovies.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.data = {
-          data: { results: action.payload.results },
-          page: action.payload.page,
-          total_pages: action.payload.total_pages,
-          total_results: action.payload.total_results,
+          data: { results: payload.results },
+          page: payload.page,
+          total_pages: payload.total_pages,
+          total_results: payload.total_results,
         };
       })
       .addCase(getUpcomingMovies.rejected, (state) => {
         state.loading = false;
       })
 
-      // Latest
       .addCase(getLatestMovie.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getLatestMovie.fulfilled, (state, action) => {
+      .addCase(getLatestMovie.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.data = {
-          data: { results: [action.payload] }, // 👈 wrap the single movie in an array
+          data: { results: [payload] },
           page: 1,
           total_pages: 1,
           total_results: 1,

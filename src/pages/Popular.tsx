@@ -1,53 +1,65 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { getPopularMovies } from "../store/features/movie-slice";
-import { Box, Typography, CircularProgress, Grid, Button } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import MovieCard from "../components/MovieCard";
+import SearchBar from "../components/SearchBar";
+import { filterMovies } from "../helpers/helper";
+import { PageLayout } from "../components/Layout/PageLayout";
 
 export default function Popular() {
   const dispatch = useAppDispatch();
-  const { data, loading } = useAppSelector((state) => state.movie);
-  const movies = data.data.results || [];
+  const {
+    data: {
+      data: { results: movies },
+    },
+    loading,
+  } = useAppSelector((state) => state.movie);
 
-  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     dispatch(getPopularMovies());
   }, [dispatch]);
 
-  const favoriteIds: number[] = JSON.parse(
-    localStorage.getItem("favorites") || "[]"
-  );
-
-  const filteredMovies = showFavoritesOnly
-    ? movies.filter((movie) => favoriteIds.includes(movie.id))
-    : movies;
+  const filteredMovies = filterMovies(movies, searchTerm);
 
   return (
-    <Box sx={{ p: 4 }}>
-      <Typography variant="h5" sx={{ mb: 2 }}>
-        Popular Movies
-      </Typography>
-
-      <Button
-        variant={showFavoritesOnly ? "contained" : "outlined"}
-        onClick={() => setShowFavoritesOnly((prev) => !prev)}
-        sx={{ mb: 2 }}
-      >
-        {showFavoritesOnly ? "Show All Movies" : "Favorites"}
-      </Button>
-
-      {loading ? (
-        <CircularProgress />
-      ) : (
-        <Grid container spacing={2}>
-          {filteredMovies.map((movie) => (
-            <Grid key={movie.id}>
-              <MovieCard movie={movie} />
-            </Grid>
-          ))}
-        </Grid>
-      )}
-    </Box>
+    <PageLayout
+      title="Popular"
+      searchBarComponent={
+        <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+      }
+    >
+      <Box>
+        {loading ? (
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+            <CircularProgress />
+          </Box>
+        ) : (
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "flex-start",
+              gap: 3,
+            }}
+          >
+            {filteredMovies.map((movie) => (
+              <Box
+                key={movie.id}
+                sx={{
+                  flex: "0 1 calc(33.333% - 24px)", // 3 cards per row
+                  boxSizing: "border-box",
+                  display: "flex",
+                }}
+              >
+                <MovieCard movie={movie} />
+              </Box>
+            ))}
+          </Box>
+        )}
+      </Box>
+    </PageLayout>
   );
 }

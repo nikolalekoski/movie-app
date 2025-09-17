@@ -3,6 +3,7 @@ import Home from "../pages/Home";
 import Popular from "../pages/Popular";
 import Upcoming from "../pages/Upcoming";
 import Latest from "../pages/Latest";
+import Favorites from "../pages/Favorites";
 
 export const Router = () => {
   return (
@@ -12,6 +13,7 @@ export const Router = () => {
       <Route path="/popular" element={<Popular />} />
       <Route path="/upcoming" element={<Upcoming />} />
       <Route path="/latest" element={<Latest />} />
+      <Route path="/favorites" element={<Favorites />} />
     </Routes>
   );
 };

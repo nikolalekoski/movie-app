@@ -11,6 +11,7 @@ import FavoriteBorderIcon from "@mui/icons-material/Favorite";
 type IProps = {
   movie: IMovie;
 };
+const IMAGE_BASE_URL = import.meta.env.VITE_TMDB_IMAGE_BASE_URL;
 
 export default function MovieCard({ movie }: IProps) {
   const [favourites, setFavourites] = useState<number[]>(() => {
@@ -33,12 +34,21 @@ export default function MovieCard({ movie }: IProps) {
   return (
     <Card
       sx={{
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
         transition: "transform 0.3s, box-shadow 0.3s",
         "&:hover": {
           transform: "scale(1.03)",
         },
-      }}>
-      <CardMedia component="img" height="250" image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+      }}
+    >
+      <CardMedia
+        component="img"
+        height="250"
+        image={`${IMAGE_BASE_URL}${movie.poster_path}`}
+        alt={movie.title}
+      />
 
       <IconButton
         onClick={toggleFavorite}
@@ -50,8 +60,13 @@ export default function MovieCard({ movie }: IProps) {
           "&:hover": {
             backgroundColor: "rgba(255, 255, 255, 0.8)",
           },
-        }}>
-        {favourites.includes(movie.id) ? <FavoriteIcon sx={{ color: "red" }} /> : <FavoriteBorderIcon />}
+        }}
+      >
+        {favourites.includes(movie.id) ? (
+          <FavoriteIcon sx={{ color: "red" }} />
+        ) : (
+          <FavoriteBorderIcon />
+        )}
       </IconButton>
 
       <CardContent
@@ -62,7 +77,8 @@ export default function MovieCard({ movie }: IProps) {
           justifyContent: "flex-start",
           overflow: "hidden",
           paddingBottom: 1,
-        }}>
+        }}
+      >
         <Typography
           sx={{
             fontWeight: "bold",
@@ -70,7 +86,8 @@ export default function MovieCard({ movie }: IProps) {
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
-          }}>
+          }}
+        >
           {movie.title} ({new Date(movie.release_date).getFullYear()})
         </Typography>
         <Typography sx={{ mb: 1 }}>
@@ -82,7 +99,8 @@ export default function MovieCard({ movie }: IProps) {
             display: "-webkit-box",
             WebkitLineClamp: 3,
             WebkitBoxOrient: "vertical",
-          }}>
+          }}
+        >
           {movie.overview}
         </Typography>
       </CardContent>
