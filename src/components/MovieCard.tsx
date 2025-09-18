@@ -19,16 +19,13 @@ export default function MovieCard({ movie }: IProps) {
   });
 
   const toggleFavorite = () => {
-    let favouritesUpdated: number[];
+    const storedFavourites: number[] = JSON.parse(localStorage.getItem("favorites") || "[]");
 
-    if (favourites.includes(movie.id)) {
-      favouritesUpdated = favourites.filter((favId) => favId !== movie.id);
-    } else {
-      favouritesUpdated = [...favourites, movie.id];
-    }
+    const favouritesUpdated = storedFavourites.includes(movie.id) ? storedFavourites.filter((favId) => favId !== movie.id) : [...storedFavourites, movie.id];
+
+    localStorage.setItem("favorites", JSON.stringify(favouritesUpdated));
 
     setFavourites(favouritesUpdated);
-    localStorage.setItem("favorites", JSON.stringify(favouritesUpdated));
   };
 
   return (
@@ -41,14 +38,8 @@ export default function MovieCard({ movie }: IProps) {
         "&:hover": {
           transform: "scale(1.03)",
         },
-      }}
-    >
-      <CardMedia
-        component="img"
-        height="250"
-        image={`${IMAGE_BASE_URL}${movie.poster_path}`}
-        alt={movie.title}
-      />
+      }}>
+      <CardMedia component="img" height="250" image={`${IMAGE_BASE_URL}${movie.poster_path}`} alt={movie.title} />
 
       <IconButton
         onClick={toggleFavorite}
@@ -60,13 +51,8 @@ export default function MovieCard({ movie }: IProps) {
           "&:hover": {
             backgroundColor: "rgba(255, 255, 255, 0.8)",
           },
-        }}
-      >
-        {favourites.includes(movie.id) ? (
-          <FavoriteIcon sx={{ color: "red" }} />
-        ) : (
-          <FavoriteBorderIcon />
-        )}
+        }}>
+        {favourites.includes(movie.id) ? <FavoriteIcon sx={{ color: "red" }} /> : <FavoriteBorderIcon />}
       </IconButton>
 
       <CardContent
@@ -77,8 +63,7 @@ export default function MovieCard({ movie }: IProps) {
           justifyContent: "flex-start",
           overflow: "hidden",
           paddingBottom: 1,
-        }}
-      >
+        }}>
         <Typography
           sx={{
             fontWeight: "bold",
@@ -86,8 +71,7 @@ export default function MovieCard({ movie }: IProps) {
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
-          }}
-        >
+          }}>
           {movie.title} ({new Date(movie.release_date).getFullYear()})
         </Typography>
         <Typography sx={{ mb: 1 }}>
@@ -99,8 +83,7 @@ export default function MovieCard({ movie }: IProps) {
             display: "-webkit-box",
             WebkitLineClamp: 3,
             WebkitBoxOrient: "vertical",
-          }}
-        >
+          }}>
           {movie.overview}
         </Typography>
       </CardContent>
