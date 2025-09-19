@@ -54,7 +54,7 @@ export default function Upcoming() {
                   display: "flex", // Ensures child (MovieCard) stretches to full he
                 }}
               >
-                <MovieCard movie={movie} />
+                <MovieCard movie={movie} showFavorite={false} />
               </Box>
             ))}
           </Box>

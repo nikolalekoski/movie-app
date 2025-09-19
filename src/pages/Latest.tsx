@@ -54,7 +54,7 @@ export default function Latest() {
                   display: "flex",
                 }}
               >
-                <MovieCard movie={movie} />
+                <MovieCard movie={movie} showFavorite={false} />
               </Box>
             ))}
           </Box>

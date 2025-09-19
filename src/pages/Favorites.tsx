@@ -2,42 +2,35 @@ import { useEffect, useState } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import MovieCard from "../components/MovieCard";
 import { PageLayout } from "../components/Layout/PageLayout";
-import type { IMovie } from "../types/movie";
 import SearchBar from "../components/SearchBar";
-
-const API_KEY = import.meta.env.VITE_API_KEY;
-const BASE_URL = import.meta.env.VITE_TMDB_BASE_URL;
+import { useAppSelector, useAppDispatch } from "../store/store";
+import { getPopularMovies } from "../store/features/movie-slice";
+import type { IMovie } from "../types/movie";
 
 export default function Favorites() {
+  const dispatch = useAppDispatch();
+
+  const {
+    data: {
+      data: { results: movies },
+    },
+    loading,
+  } = useAppSelector((state) => state.movie);
+
   const [favoriteMovies, setFavoriteMovies] = useState<IMovie[]>([]);
-  const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    const fetchFavoriteMovies = async () => {
-      setLoading(true);
-      const favoriteIds: number[] = JSON.parse(
-        localStorage.getItem("favorites") || "[]"
-      );
+    dispatch(getPopularMovies());
+  }, [dispatch]);
 
-      try {
-        const movies = await Promise.all(
-          favoriteIds.map(async (id) => {
-            const res = await fetch(`${BASE_URL}/${id}?api_key=${API_KEY}`);
-            if (!res.ok) throw new Error("Failed to fetch movie");
-            return res.json() as Promise<IMovie>;
-          })
-        );
-        setFavoriteMovies(movies);
-      } catch (error) {
-        console.error("Error fetching favorite movies", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFavoriteMovies();
-  }, []);
+  useEffect(() => {
+    const favoriteIds: number[] = JSON.parse(
+      localStorage.getItem("favorites") || "[]"
+    );
+    const filtered = movies.filter((movie) => favoriteIds.includes(movie.id));
+    setFavoriteMovies(filtered);
+  }, [movies]);
 
   if (loading) {
     return (
@@ -53,7 +46,7 @@ export default function Favorites() {
     return (
       <PageLayout title="Favorites">
         <Typography variant="h6" sx={{ mt: 5, textAlign: "center" }}>
-          No favorite movies added yet.
+          No favorite movies found.
         </Typography>
       </PageLayout>
     );
