@@ -4,18 +4,19 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { Router } from "./router/Router";
 import { BrowserRouter } from "react-router-dom";
-import { CssBaseline } from "@mui/material";
+import { ThemeProvider } from "./theme/ThemeProvider";
 
 function App() {
   return (
     <>
-      <Provider store={store}>
-        <BrowserRouter>
-          <CssBaseline />
-          <Header />
-          <Router />
-        </BrowserRouter>
-      </Provider>
+      <ThemeProvider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Header />
+            <Router />
+          </BrowserRouter>
+        </Provider>
+      </ThemeProvider>
     </>
   );
 }
