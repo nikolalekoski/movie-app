@@ -1,42 +1,34 @@
 import { Typography } from "@mui/material";
-import Header from "../Header";
 import { Box } from "@mui/material";
 import type { ReactNode } from "react";
 
 export interface IProps {
   children: React.ReactNode;
   title: string;
-  headerRight?: ReactNode;
+  searchBarComponent?: ReactNode;
 }
 
-export const PageLayout = ({ children, title, headerRight }: IProps) => {
+export const PageLayout = ({ children, title, searchBarComponent }: IProps) => {
   return (
-    <>
-      <Header />
+    <Box sx={{ padding: 4 }}>
+      <Box display="flex" sx={{ alignItems: "center", justifyContent: "space-between", mb: 5 }}>
+        <Typography variant="h4" fontWeight="bold" sx={{ lineHeight: 1 }}>
+          {title}
+        </Typography>
 
-      <Box sx={{ paddingTop: "50px", px: 3, mb: 2 }}>
-        <Box
-          sx={{
-            display: "flex",
-          }}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography variant="h4" fontWeight="bold" sx={{ lineHeight: 1, mt: "28px" }}>
-              {title}
-            </Typography>
+        {searchBarComponent && (
+          <Box
+            sx={{
+              position: "absolute",
+              left: "50%",
+              transform: "translateX(-50%)",
+            }}>
+            {searchBarComponent}
           </Box>
-          {headerRight && (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                flex: 1,
-              }}>
-              <Box>{headerRight}</Box>
-            </Box>
-          )}
-        </Box>
+        )}
       </Box>
-      <Box>{children}</Box>
-    </>
+
+      {children}
+    </Box>
   );
 };

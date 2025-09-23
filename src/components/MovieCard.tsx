@@ -3,86 +3,98 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { Typography } from "@mui/material";
 import type { IMovie } from "../types/movie";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/Favorite";
 
 type IProps = {
   movie: IMovie;
+  showFavorite?: boolean;
 };
+const IMAGE_BASE_URL = import.meta.env.VITE_TMDB_IMAGE_BASE_URL;
 
-export default function MovieCard({ movie }: IProps) {
-  const [isFavorite, setIsFavorite] = useState(false);
+export default function MovieCard({ movie, showFavorite = true }: IProps) {
+  const [favourites, setFavourites] = useState<number[]>(() => {
+    return JSON.parse(localStorage.getItem("favorites") || "[]");
+  });
 
-  // Load from localStorage
-  useEffect(() => {
-    const storedIds: string[] = JSON.parse(
-      localStorage.getItem("favorites") || "[]"
-    );
-    setIsFavorite(storedIds.includes(movie.id));
-  }, [movie.id]);
-
-  // Toggle favorite
   const toggleFavorite = () => {
-    const storedIds: string[] = JSON.parse(
+    const storedFavourites: number[] = JSON.parse(
       localStorage.getItem("favorites") || "[]"
     );
-    let updatedIds: string[];
 
-    if (storedIds.includes(movie.id)) {
-      updatedIds = storedIds.filter((id) => id !== movie.id);
-      setIsFavorite(false);
-    } else {
-      updatedIds = [...storedIds, movie.id];
-      setIsFavorite(true);
-    }
+    const favouritesUpdated = storedFavourites.includes(movie.id)
+      ? storedFavourites.filter((favId) => favId !== movie.id)
+      : [...storedFavourites, movie.id];
 
-    localStorage.setItem("favorites", JSON.stringify(updatedIds));
+    localStorage.setItem("favorites", JSON.stringify(favouritesUpdated));
+
+    setFavourites(favouritesUpdated);
   };
 
   return (
     <Card
       sx={{
-        maxWidth: 385,
-        margin: 5,
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
         transition: "transform 0.3s, box-shadow 0.3s",
         "&:hover": {
           transform: "scale(1.03)",
-          boxShadow: 3,
         },
       }}
     >
       <CardMedia
         component="img"
         height="250"
-        image={movie.poster}
+        image={`${IMAGE_BASE_URL}${movie.poster_path}`}
         alt={movie.title}
       />
-      <IconButton
-        onClick={toggleFavorite}
+      {showFavorite && (
+        <IconButton
+          onClick={toggleFavorite}
+          sx={{
+            position: "absolute",
+            top: 10,
+            right: 10,
+            backgroundColor: "rgba(255, 255, 255, 0.7)",
+            "&:hover": {
+              backgroundColor: "rgba(255, 255, 255, 0.8)",
+            },
+          }}
+        >
+          {favourites.includes(movie.id) ? (
+            <FavoriteIcon sx={{ color: "red" }} />
+          ) : (
+            <FavoriteBorderIcon />
+          )}
+        </IconButton>
+      )}
+
+      <CardContent
         sx={{
-          position: "absolute",
-          top: 10,
-          right: 10,
-          backgroundColor: "rgba(255, 255, 255, 0.7)",
-          "&:hover": {
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
-          },
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          overflow: "hidden",
+          paddingBottom: 1,
         }}
       >
-        {isFavorite ? (
-          <FavoriteIcon sx={{ color: "red" }} />
-        ) : (
-          <FavoriteBorderIcon />
-        )}
-      </IconButton>
-      <CardContent>
-        <Typography sx={{ fontWeight: "bold", mb: 1 }}>
-          {movie.title} {movie.year}
+        <Typography
+          sx={{
+            fontWeight: "bold",
+            mb: 1,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {movie.title} ({new Date(movie.release_date).getFullYear()})
         </Typography>
         <Typography sx={{ mb: 1 }}>
-          {movie.genre} - {movie.rating}
+          Rating: {movie.vote_average} ({movie.vote_count} votes)
         </Typography>
         <Typography
           sx={{
@@ -92,7 +104,7 @@ export default function MovieCard({ movie }: IProps) {
             WebkitBoxOrient: "vertical",
           }}
         >
-          {movie.description}
+          {movie.overview}
         </Typography>
       </CardContent>
     </Card>
