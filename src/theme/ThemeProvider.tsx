@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import type { ReactNode } from "react";
 import {
   createTheme,
@@ -14,8 +14,19 @@ interface Props {
 export const ThemeProvider = ({ children }: Props) => {
   const [mode, setMode] = useState<ThemeMode>("light");
 
+  useEffect(() => {
+    const savedMode = localStorage.getItem("themeMode") as ThemeMode;
+    if (savedMode) {
+      setMode(savedMode);
+    }
+  }, []);
+
   const toggleTheme = () => {
-    setMode((prev) => (prev === "light" ? "dark" : "light"));
+    setMode((prev) => {
+      const next = prev === "light" ? "dark" : "light";
+      localStorage.setItem("themeMode", next);
+      return next;
+    });
   };
 
   const theme = useMemo(() => {
