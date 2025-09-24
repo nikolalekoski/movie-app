@@ -36,7 +36,7 @@ export const ThemeProvider = ({ children }: Props) => {
         ...(mode === "dark"
           ? {
               background: {
-                default: "#1c1c1e", // very dark gray (softer than #121212 or black)
+                default: "#1c1c1e",
                 paper: "#2c2c2e",
               },
               text: {
@@ -44,7 +44,7 @@ export const ThemeProvider = ({ children }: Props) => {
                 secondary: "#b0b0b0",
               },
               primary: {
-                main: "#ff69b4", // 💖 HOT PINK for testing
+                main: "#ff69b4",
               },
             }
           : {
