@@ -51,7 +51,7 @@ git clone https://github.com/goran-josifovski/movie-app.git
 
 # Go into the project folder
 
-cd movie-browser
+cd movie-app
 
 # Install dependencies
 
