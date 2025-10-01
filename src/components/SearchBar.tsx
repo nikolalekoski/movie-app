@@ -1,6 +1,5 @@
-import { TextField, Box, InputAdornment } from "@mui/material";
+import { TextField, Box, InputAdornment, useTheme } from "@mui/material";
 import React from "react";
-import { Colors } from "../shared/colors.ts";
 import SearchIcon from "@mui/icons-material/Search";
 
 interface SearchBarProps {
@@ -8,15 +7,25 @@ interface SearchBarProps {
   onSearchChange: (value: string) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, onSearchChange }) => {
+const SearchBar: React.FC<SearchBarProps> = ({
+  searchTerm,
+  onSearchChange,
+}) => {
+  const theme = useTheme();
+
   return (
     <Box
       sx={{
         display: "flex",
         borderRadius: 8,
-        boxShadow: `0 1px 10px ${Colors.primary.black}`,
         px: 1,
-      }}>
+        boxShadow: theme.shadows[3],
+        bgcolor:
+          theme.palette.mode === "dark"
+            ? "rgba(255, 255, 255, 0.08)"
+            : "rgba(0, 0, 0, 0.05)",
+      }}
+    >
       <TextField
         variant="standard"
         placeholder="Search movies"
@@ -26,15 +35,21 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, onSearchChange }) => 
           disableUnderline: true,
           startAdornment: (
             <InputAdornment position="start">
-              <SearchIcon />
+              <SearchIcon
+                sx={{
+                  color: theme.palette.text.secondary,
+                }}
+              />
             </InputAdornment>
           ),
         }}
         sx={{
           p: 1,
+          color: theme.palette.text.primary,
         }}
       />
     </Box>
   );
 };
+
 export default SearchBar;

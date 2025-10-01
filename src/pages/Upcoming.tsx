@@ -49,9 +49,9 @@ export default function Upcoming() {
               <Box
                 key={movie.id}
                 sx={{
-                  flex: "0 1 calc(33.333% - 24px)", // 3 per row with spacing
+                  flex: "0 1 calc(33.333% - 24px)",
                   boxSizing: "border-box",
-                  display: "flex", // Ensures child (MovieCard) stretches to full he
+                  display: "flex",
                 }}
               >
                 <MovieCard movie={movie} showFavorite={false} />
