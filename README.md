@@ -1,6 +1,6 @@
 # 🎬 Movie Platform – React + Vite + TypeScript
 
-Movie Browser is a responsive frontend application built with **React**, **Vite**, and **TypeScript**.  
+Movie App is a responsive frontend application built with **React**, **Vite**, and **TypeScript**.  
 It lets users browse, search, and filter movies from a **dummy dataset**, making it perfect for learning and practicing modern frontend development.
 
 ---
